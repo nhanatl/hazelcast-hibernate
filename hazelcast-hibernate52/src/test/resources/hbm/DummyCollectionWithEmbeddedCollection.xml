@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-lazy="false">
+    <class name="com.hazelcast.hibernate.entity.DummyEntityWithEmbeddedCollection" table="ENTITY_COLLECTION" lazy="true">
+        <cache usage="read-write"/>
+
+        <id name="id" column="ID" unsaved-value="null">
+        </id>
+
+        <property name="name" type="string" length="255" not-null="true" column="NAME"/>
+
+        <map cascade="all" name="attributes" table="ENTITY_COLLECTION_ATTRIBUTE">
+            <cache usage="read-write"/>
+            <key column="directory_id" foreign-key="fk_directory_attribute"/>
+            <index column="ATTRIBUTE_NAME" type="string" length="255"/>
+            <element column="ATTRIBUTE_VALUE" type="string" length="4000"/>
+        </map>
+    </class>
+</hibernate-mapping>
